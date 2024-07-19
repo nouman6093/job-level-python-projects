@@ -66,12 +66,9 @@ guessed_states = []
 while len(guessed_states) < 50:
     input1 = screen.textinput(title=f"{len(guessed_states)}/50 Guess the State", prompt="What's another states name? or type 'Exit'")
     if input1 == "Exit" or input1 == "exit":
-        missing_states = []
-        for i in all_states:
-            if i not in guessed_states:
-                missing_states.append(i)
-                data1 = pandas.DataFrame(missing_states)
-                data1.to_csv("states_to_learn.csv")
+        missing_states = [i for i in all_states if i not in guessed_states] #this is conditional list comprehension. its so good it just replaced 4 lines of code!
+        data1 = pandas.DataFrame(missing_states)
+        data1.to_csv("states_to_learn.csv")
         break
     elif input1 in all_states:
         guessed_states.append(input1)
